@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#140e1b" />
+  <meta name="description" content="Una carta de amor digital para Diana, escrita con estrellas, un sobre y un corazón matemático." />
+  <title>Para mí reina Diana ♡</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --night: #140e1b;
+      --plum: #281326;
+      --wine: #651e3b;
+      --pink: #f9a4b9;
+      --rose: #ea627f;
+      --gold: #e8ba78;
+      --cream: #fff4e6;
+      --ink: #52313b;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { min-height: 100%; background: var(--night); }
+    body { margin: 0; min-height: 100svh; overflow-x: hidden; font-family: var(--sans); color: var(--cream); }
+    button { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid #ffcfb6; outline-offset: 5px; }
+    .world {
+      position: relative; display: grid; place-items: center; isolation: isolate;
+      width: 100%; min-height: 100svh; overflow: hidden;
+      background:
+        radial-gradient(ellipse 39% 42% at 50% 42%, rgba(122, 41, 77, .47), transparent 90%),
+        radial-gradient(ellipse 42% 42% at 90% 90%, rgba(81, 36, 80, .42), transparent 85%),
+        radial-gradient(ellipse 36% 39% at 8% 12%, rgba(88, 39, 84, .28), transparent 80%),
+        linear-gradient(148deg, #130f20 0%, #2b142b 46%, #170f1e 100%);
+    }
+    .world::after {
+      content:""; pointer-events:none; position:absolute; inset:0; z-index:-1; opacity:.18;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.38' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .aurora { position:absolute; z-index:-1; width:57vmax; height:57vmax; border-radius:50%; filter:blur(80px); opacity:.17; pointer-events:none; }
+    .aurora-a { left:-28vmax; top:-22vmax; background: #bb548e; animation: drift 16s ease-in-out infinite alternate; }
+    .aurora-b { right:-31vmax; bottom:-28vmax; background: #bd5171; animation: drift 19s ease-in-out infinite alternate-reverse; }
+    @keyframes drift { to { transform:translate(7vw, 5vh) scale(1.14); } }
+    #stars, #petals { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+    #stars { z-index:0; }
+    #petals { z-index:5; }
+    .star { position:absolute; width:var(--s); height:var(--s); border-radius:50%; background:#fff4d6; opacity:var(--o); box-shadow:0 0 12px 2px rgba(255,216,178,.32); animation: twinkle var(--d) ease-in-out infinite alternate; animation-delay:var(--delay); }
+    @keyframes twinkle { from { opacity:.12; transform:scale(.7); } to { opacity:var(--o); transform:scale(1.4); } }
+    .petal { position:absolute; left:var(--x); top:-12vh; width:var(--w); height:calc(var(--w) * 1.15); border-radius:75% 0 75% 0; background:linear-gradient(130deg, #ffcaad, #e86b90 70%, #ac3f6e); opacity:0; transform:rotate(35deg); animation:petal-fall var(--d) linear forwards; animation-delay:var(--delay); filter:drop-shadow(0 0 5px rgba(255,146,169,.16)); }
+    @keyframes petal-fall { 0%{opacity:0;transform:translate(0,0) rotate(10deg)} 8%{opacity:.78} 85%{opacity:.6} 100%{opacity:0;transform:translate(var(--dx),115vh) rotate(var(--rot))} }
+    .frame-corner { position:absolute; z-index:1; width:58px; height:58px; opacity:.6; border-color:rgba(227,180,123,.72); border-style:solid; pointer-events:none; }
+    .top-left {top:28px;left:28px;border-width:1px 0 0 1px;border-radius:20px 0 0 0}
+    .top-right {top:28px;right:28px;border-width:1px 1px 0 0;border-radius:0 20px 0 0}
+    .bottom-left {bottom:28px;left:28px;border-width:0 0 1px 1px;border-radius:0 0 0 20px}
+    .bottom-right {bottom:28px;right:28px;border-width:0 1px 1px 0;border-radius:0 0 20px 0}
+    .scene { position:relative; z-index:2; width:min(100%, 940px); min-height:700px; min-height:min(760px, 100svh); display:grid; place-items:center; padding:0; }
+    .stage { width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; position:absolute; inset:0; padding:70px 20px; text-align:center; transition:opacity .8s ease, transform .8s ease, visibility .8s; }
+    .stage[aria-hidden="true"] { visibility:hidden; opacity:0; pointer-events:none; transform:translateY(18px); }
+    .stage[aria-hidden="false"] { position:relative; inset:auto; min-height:min(760px, 100svh); }
+    .stage[aria-hidden="false"] { visibility:visible; opacity:1; transform:translateY(0); }
+    .eyebrow { display:flex; align-items:center; justify-content:center; gap:13px; color:#e8bd8c; font-size:10px; letter-spacing:.34em; text-transform:uppercase; font-weight:700; margin:0 0 24px; }
+    .eyebrow::before,.eyebrow::after {content:"";width:28px;height:1px;background:linear-gradient(90deg,transparent,#dda46e)}
+    .eyebrow::after {transform:rotate(180deg)}
+    .cover-title { font-family:var(--serif); font-size:clamp(40px,7vw,78px); font-weight:400; letter-spacing:-.045em; line-height:1.1; margin:0; text-wrap:balance; }
+    .cover-title em {color:#ffbac8; font-weight:400; font-style:italic; text-shadow:0 0 32px rgba(245,121,165,.25)}
+    .cover-copy {margin:16px 0 4px;color:#f1d7d7;font-size:clamp(13px,2.4vw,15px);line-height:1.75;letter-spacing:.045em;opacity:.84}
+    .envelope-wrap { position:relative; width:330px; max-width:80vw; height:252px; margin:16px 0 20px; display:grid;place-items:center; }
+    .envelope-halo { position:absolute; inset:40px 16px 0; border-radius:50%; background:radial-gradient(ellipse,rgba(243,132,153,.3),transparent 69%); filter:blur(25px); animation:breathe 3.6s ease-in-out infinite alternate; }
+    @keyframes breathe { to {transform:scale(1.15);opacity:.5;} }
+    .envelope { position:relative; display:block; width:284px; height:182px; border:0; padding:0; background:none; color:inherit; cursor:pointer; perspective:700px; filter:drop-shadow(0 22px 34px rgba(9,4,16,.38)); animation:envelope-float 3.8s ease-in-out infinite; }
+    @keyframes envelope-float { 0%,100% {transform:translateY(0) rotate(-2deg);} 50% {transform:translateY(-10px) rotate(-1deg);} }
+    .envelope:disabled {cursor:default;}
+    .envelope.open {animation:none; transform:translateY(0) rotate(-1deg)}
+    .env-back {position:absolute;inset:0;background:linear-gradient(120deg,#d5a37f,#f7d6b7);border-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}
+    .env-paper { position:absolute;left:22px;right:22px;top:14px;height:146px;z-index:2;border-radius:4px 4px 0 0;background:linear-gradient(160deg,#fff8ec,#f1dfc8);box-shadow:0 0 12px rgba(85,40,50,.12);display:grid;place-items:center;transform:translateY(0);transition:transform 1.1s cubic-bezier(.2,.75,.28,1) .37s; }
+    .env-paper svg {width:64px;height:64px;fill:none;stroke:#b75a69;stroke-width:1.25;opacity:.85;}
+    .env-front {position:absolute;z-index:4;inset:0;overflow:hidden;border-radius:7px;pointer-events:none;}
+    .env-front::before {content:"";position:absolute;inset:0;background:linear-gradient(150deg,#efd0b0,#e6b58e);clip-path:polygon(0 0, 50% 54%, 0 100%);}
+    .env-front::after {content:"";position:absolute;inset:0;background:linear-gradient(30deg,#f8ddbd,#eac097);clip-path:polygon(100% 0, 50% 54%, 100% 100%);}
+    .env-bottom {position:absolute;z-index:5;inset:0;background:linear-gradient(0deg,#e8b991,#ffe4c3);clip-path:polygon(0 100%,50% 46%,100% 100%);border-radius:0 0 7px 7px;pointer-events:none;}
+    .env-flap { position:absolute;z-index:6;inset:0;transform-origin:50% 0;backface-visibility:hidden;background:linear-gradient(180deg,#ffe2bf,#e4ae88);clip-path:polygon(0 0,100% 0,50% 58%);border-radius:7px;transition:transform .65s cubic-bezier(.3,.65,.25,1);}
+    .env-seal {position:absolute;z-index:7;left:50%;top:51%;display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#d88ca0,#a63459 75%);border:2px solid rgba(255,218,198,.46);box-shadow:0 2px 8px #6d243e66, inset 0 2px 4px rgba(255,239,206,.22);transform:translate(-50%,-50%);transition:opacity .4s ease, transform .4s ease;}
+    .env-seal svg {width:24px;height:24px;fill:#fff1db;stroke:none;}
+    .envelope.open .env-flap {transform:rotateX(180deg);}
+    .envelope.open .env-paper {transform:translateY(-88px);}
+    .envelope.open .env-seal {opacity:0;transform:translate(-50%,-50%) scale(.5);}
+    .primary-button { display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:50px;padding:0 27px;border-radius:99px;border:1px solid rgba(249,200,179,.42);color:#36182b;background:linear-gradient(135deg,#ffdfc2,#f4b6ba);box-shadow:0 8px 30px rgba(241,124,153,.17),inset 0 1px rgba(255,255,255,.55);cursor:pointer;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;transition:transform .25s,box-shadow .25s; }
+    .primary-button:hover {transform:translateY(-3px);box-shadow:0 12px 34px rgba(241,124,153,.3);}
+    .primary-button:active {transform:translateY(0);}
+    .primary-button svg {width:16px;height:16px;}
+    .hint { margin-top:18px;font-size:11px;letter-spacing:.1em;color:#d1acb7;opacity:.7; }
+    /* Drawing the mathematical heart */
+    .heart-stage .eyebrow {margin-bottom:12px;}
+    .heart-stage h2 {font:normal clamp(25px,4.9vw,45px)/1.17 var(--serif);letter-spacing:-.025em;max-width:750px;margin:0 0 3px;text-wrap:balance;}
+    .heart-stage h2 em {color:#ffbdc5;font-weight:400;}
+    .heart-frame {position:relative;width:min(90vw,500px);aspect-ratio:520 / 470;max-height:52vh;display:grid;place-items:center;margin:0 auto -5px;}
+    .heart-frame::before {content:"";position:absolute;inset:20% 15%;background:radial-gradient(ellipse,#c8487044,transparent 72%);filter:blur(25px);}
+    .heart-svg {width:100%;height:100%;overflow:visible;position:relative;filter:drop-shadow(0 0 22px rgba(241,99,129,.12));}
+    .plane-grid,.plane-axis,.plane-tick {fill:none;stroke-linecap:round;opacity:0;vector-effect:non-scaling-stroke;}
+    .plane-grid {stroke:rgba(255,227,221,.17);stroke-width:1;}
+    .plane-axis {stroke:rgba(255,222,213,.56);stroke-width:1.9;}
+    .plane-tick {stroke:rgba(255,225,218,.46);stroke-width:1.3;}
+    .plane-label,.plane-origin,.plane-dot {opacity:0;pointer-events:none;}
+    .plane-label {fill:#f4d8d1;font:italic 12px/1 var(--serif);letter-spacing:.04em;}
+    .plane-origin {fill:#efd4cd;font:10px/1 var(--sans);letter-spacing:.08em;}
+    .plane-dot {fill:#ffe4dc;}
+    .heart-outline {fill:none;stroke:url(#heartStroke);stroke-width:3.1;stroke-linecap:round;stroke-linejoin:round;}
+    .heart-glow {fill:none;stroke:#f56e93;stroke-width:14;opacity:.44;filter:url(#softGlow);}
+    .heart-interior {fill:url(#heartFill);stroke:none;opacity:0;transition:opacity 1.7s ease;}
+    .heart-stage.complete .heart-interior {opacity:1;}
+    .heart-stage.complete .heart-svg {animation:heart-beat 2.5s ease-in-out infinite;transform-origin:50% 50%;}
+    @keyframes heart-beat {0%,100%{transform:scale(1)} 12%{transform:scale(1.045)} 23%{transform:scale(1)} 34%{transform:scale(1.025)} 46%{transform:scale(1)}}
+    .heart-sparkle {fill:#ffd6c1;opacity:0;transform-box:fill-box;transform-origin:center;}
+    .heart-sparkle.bloom {animation:sparkle .85s ease-out forwards;}
+    @keyframes sparkle {0%{opacity:0;transform:scale(.1)}35%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0)}}
+    .equation-label {font:normal 13px/1.6 var(--serif);letter-spacing:.025em;color:#f0c0c7;opacity:.83;margin:0;}
+    .heart-caption {color:#f5d9d6;font-size:13px;line-height:1.7;margin:13px 0 0;opacity:.83;}
+    /* The final stationery card */
+    .final-stage {padding:26px 20px;}
+    .letter-card {position:relative;width:min(100%,590px);overflow:visible; border-radius:5px;background:
+      radial-gradient(ellipse 75% 45% at 50% 5%,rgba(255,255,255,.95),transparent),
+      linear-gradient(148deg,#fff8ed 0%,#fbeddd 65%,#f9e5d4 100%);
+      color:var(--ink);padding:clamp(28px,5.3vw,53px) clamp(24px,6vw,64px) 33px;border:1px solid rgba(255,243,218,.95);
+      box-shadow:0 25px 90px rgba(4,0,8,.46),0 0 0 7px rgba(250,191,179,.09),inset 0 0 0 1px rgba(174,118,100,.16);
+      transform:translateY(30px) scale(.96);opacity:0;transition:transform 1.4s cubic-bezier(.17,.8,.23,1),opacity 1.3s ease;
+    }
+    .final-stage[aria-hidden="false"] .letter-card {transform:translateY(0) scale(1);opacity:1;}
+    .letter-card::before {content:"";position:absolute;pointer-events:none;inset:11px;border:1px solid rgba(181,126,98,.23);border-radius:2px;}
+    .letter-topline {display:flex;align-items:center;justify-content:center;gap:15px;font-size:9px;letter-spacing:.28em;text-transform:uppercase;font-weight:700;color:#b78075;}
+    .letter-topline::before,.letter-topline::after {content:"";display:block;width:36px;height:1px;background:#d5ae9d;}
+    .flourish {display:block;width:112px;height:58px;margin:19px auto 9px;color:#ba7481;}
+    .letter-card h2 {font:italic normal clamp(34px,7.2vw,53px)/1.06 var(--serif);letter-spacing:-.035em;color:#743549;margin:0 0 19px;}
+    .letter-copy {font:normal clamp(15px,2.6vw,18px)/1.9 var(--serif);color:#654851;margin:0 auto;max-width:450px;}
+    .letter-copy strong {font-weight:normal;color:#a34065;font-style:italic;}
+    .letter-divider {display:flex;align-items:center;gap:12px;max-width:320px;margin:23px auto 20px;color:#c48d8b;}
+    .letter-divider::before,.letter-divider::after {content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,#cb9c9b)}
+    .letter-divider::after {transform:rotate(180deg)}
+    .letter-quote {margin:0 auto;max-width:450px;font:italic normal clamp(17px,3.4vw,23px)/1.47 var(--serif);color:#793d50;}
+    .quote-source {display:block;margin:13px auto 0;color:#a27371;font-size:10px;letter-spacing:.12em;line-height:1.6;}
+    .letter-signoff {margin:24px 0 0;color:#a94562;font:italic 25px/1.3 var(--serif);}
+    .letter-footer {margin-top:24px;display:flex;align-items:center;justify-content:center;gap:10px;color:#a88780;font-size:9px;letter-spacing:.08em;}
+    .letter-footer svg {width:13px;height:13px;fill:#c06b7e;}
+    .replay {display:inline-flex;gap:10px;align-items:center;margin-top:23px;padding:10px 15px;color:#f8dccf;font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:1px solid rgba(255,204,187,.29);border-radius:99px;cursor:pointer;transition:background .2s,transform .2s;}
+    .replay:hover {background:rgba(255,220,210,.1);transform:translateY(-2px)}
+    .replay svg {height:13px;width:13px;}
+    .hidden-status {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+    @media (min-width:601px) and (max-height:850px) {
+      .letter-card {padding:25px 48px 19px;}
+      .flourish {width:95px;height:43px;margin:8px auto 5px;}
+      .letter-card h2 {margin-bottom:12px;}
+      .letter-copy {line-height:1.65;font-size:17px;}
+      .letter-divider {margin:15px auto 13px;}
+      .letter-quote {line-height:1.38;font-size:21px;}
+      .quote-source {margin-top:8px;}
+      .letter-signoff {margin-top:12px;}
+      .letter-footer {margin-top:11px;}
+    }
+    @media(max-width:600px) {
+      .scene { min-height:100svh; padding:0; }
+      .stage {padding:55px 16px;}
+      .frame-corner {width:28px;height:28px;opacity:.5;}
+      .top-left{top:12px;left:12px}.top-right{top:12px;right:12px}.bottom-left{bottom:12px;left:12px}.bottom-right{bottom:12px;right:12px}
+      .eyebrow {margin-bottom:16px;font-size:9px;letter-spacing:.23em;}
+      .cover-copy{margin-top:16px}
+      .envelope-wrap {transform:scale(.9);margin:0 0 10px;}
+      .heart-frame {width:min(96vw,430px);max-height:49vh;}
+      .heart-caption{margin-top:6px}
+      .final-stage {padding:35px 17px;justify-content:center;}
+      .letter-card {max-height:none;}
+      .letter-topline {font-size:8px;}
+      .flourish {width:95px;height:44px;margin:11px auto 9px;}
+      .letter-card h2 {margin-bottom:14px;}
+      .letter-divider{margin:17px auto 16px;}
+      .letter-signoff{margin-top:15px;}
+    }
+    @media (max-height:680px) {
+      .envelope-wrap{transform:scale(.78);height:210px;margin:-5px 0 0}
+      .cover-copy{margin-top:9px}
+      .eyebrow{margin-bottom:11px}
+      .hint{margin-top:8px}
+      .heart-frame{max-height:46vh}
+    }
+    @media(prefers-reduced-motion:reduce) {
+      *, *::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important;}
+    }
+  </style>
+</head>
+<body>
+  <main class="world">
+    <div class="aurora aurora-a" aria-hidden="true"></div>
+    <div class="aurora aurora-b" aria-hidden="true"></div>
+    <div id="stars" aria-hidden="true"></div>
+    <div id="petals" aria-hidden="true"></div>
+    <span class="frame-corner top-left" aria-hidden="true"></span>
+    <span class="frame-corner top-right" aria-hidden="true"></span>
+    <span class="frame-corner bottom-left" aria-hidden="true"></span>
+    <span class="frame-corner bottom-right" aria-hidden="true"></span>
+
+    <div class="scene">
+      <section class="stage cover-stage" id="cover" aria-hidden="false" aria-label="Portada de la carta">
+        <p class="eyebrow">Una carta hecha para ti</p>
+        <h1 class="cover-title">para mí <em>reina Diana</em></h1>
+        <p class="cover-copy">Hay palabras que guardé en el corazón…<br>Hoy quiero que las encuentres aquí.</p>
+        <div class="envelope-wrap">
+          <div class="envelope-halo"></div>
+          <button class="envelope" id="envelope" type="button" aria-label="Abrir el sobre para Diana">
+            <span class="env-back"></span>
+            <span class="env-paper">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 51 C9 36 7 24 17 18 C25 14 31 21 32 24 C35 17 44 13 51 19 C61 29 47 43 32 51Z"/><path d="M20 31C23 36 27 39 32 42" opacity=".4"/></svg>
+            </span>
+            <span class="env-front"></span>
+            <span class="env-bottom"></span>
+            <span class="env-flap"></span>
+            <span class="env-seal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-9.5-5.8-9.5-12A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.5 9C21.5 15.2 12 21 12 21Z"/></svg></span>
+          </button>
+        </div>
+        <button type="button" class="primary-button" id="openButton">
+          Abrir mi carta
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16m-7-7 7 7-7 7"/></svg>
+        </button>
+        <span class="hint">Un pequeño detalle con un amor inmenso ♡</span>
+      </section>
+
+      <section class="stage heart-stage" id="heartStage" aria-hidden="true" aria-label="Un plano cartesiano y un corazón que se dibujan">
+        <p class="eyebrow">Hay sentimientos que toman forma</p>
+        <h2>Si el amor pudiera dibujarse,<br><em>se vería así.</em></h2>
+        <div class="heart-frame">
+          <svg class="heart-svg" id="heartSvg" viewBox="0 0 520 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animación de un plano cartesiano sobre el que luego se dibuja un corazón matemático">
+            <defs>
+              <linearGradient id="heartStroke" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe0c6"/><stop offset=".43" stop-color="#ff90ae"/><stop offset="1" stop-color="#d95185"/></linearGradient>
+              <linearGradient id="heartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6a3b7" stop-opacity=".48"/><stop offset=".7" stop-color="#b73568" stop-opacity=".27"/><stop offset="1" stop-color="#a32f6c" stop-opacity=".08"/></linearGradient>
+              <filter id="softGlow"><feGaussianBlur stdDeviation="7" /></filter>
+            </defs>
+            <g id="planeLayer" aria-hidden="true">
+              <g id="gridLayer"></g>
+              <g id="planeLabels"></g>
+            </g>
+            <path class="heart-interior" id="heartInterior"></path>
+            <path class="heart-glow" id="heartGlow"></path>
+            <path class="heart-outline" id="heartOutline"></path>
+            <g id="heartSparkles"></g>
+          </svg>
+        </div>
+        <p class="equation-label">x = 16 sen³(t) &nbsp;·&nbsp; y = 13 cos(t) − 5 cos(2t) − 2 cos(3t) − cos(4t)</p>
+        <p class="heart-caption">Junto a ti está mi felicidad, esperanza y tranquilidad</p>
+      </section>
+
+      <section class="stage final-stage" id="finalStage" aria-hidden="true" aria-label="Carta para Diana">
+        <article class="letter-card">
+          <div class="letter-topline">De mi corazón al tuyo</div>
+          <svg class="flourish" viewBox="0 0 140 70" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M70 60C70 41 45 40 45 21M70 60C70 41 95 40 95 21M70 58V27"/>
+            <path d="M46 34C32 36 27 22 28 14C41 15 47 23 46 34ZM94 34C108 36 113 22 112 14C99 15 93 23 94 34ZM69 42C57 36 60 22 70 18C79 23 82 36 69 42Z" fill="currentColor" fill-opacity=".1"/>
+            <path d="M56 44C46 47 37 42 34 37M84 44C94 47 103 42 106 37"/>
+            <path d="M69 16C61 8 64 3 69 3C74 3 77 8 69 16Z" fill="currentColor" fill-opacity=".2"/>
+          </svg>
+          <h2>Diana, mi amor…</h2>
+          <p class="letter-copy">Si pudiera convertir lo que siento en estrellas, el cielo se quedaría pequeño. Y si pudiera dibujarlo, cada línea terminaría encontrándote a ti.<br><br><strong>En todos mis días, mi parte favorita siempre será compartir la vida contigo.</strong></p>
+          <div class="letter-divider" aria-hidden="true">♡</div>
+          <blockquote class="letter-quote">“Mi amor es tan profundo; cuanto más te doy, más tengo, porque ambos son infinitos.”</blockquote>
+          <span class="quote-source">WILLIAM SHAKESPEARE · ROMEO Y JULIETA, ACTO II, ESCENA II</span>
+          <p class="letter-signoff">Siempre tú. ♡</p>
+          <div class="letter-footer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-9.5-5.8-9.5-12A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.5 9C21.5 15.2 12 21 12 21Z"/></svg>
+            <span>UN REGALO PARA DIANA</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-9.5-5.8-9.5-12A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.5 9C21.5 15.2 12 21 12 21Z"/></svg>
+          </div>
+        </article>
+        <button type="button" id="replayButton" class="replay" aria-label="Ver de nuevo la carta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11a9 9 0 1 1 2 6M3 4v7h7"/></svg>
+          Ver de nuevo
+        </button>
+      </section>
+    </div>
+    <p class="hidden-status" id="announcement" role="status" aria-live="polite"></p>
+  </main>
+
+  <script>
+    (() => {
+      'use strict';
+      const $ = id => document.getElementById(id);
+      const cover = $('cover');
+      const heartStage = $('heartStage');
+      const finalStage = $('finalStage');
+      const envelope = $('envelope');
+      const openButton = $('openButton');
+      const replayButton = $('replayButton');
+      const heartPath = $('heartOutline');
+      const glowPath = $('heartGlow');
+      const interiorPath = $('heartInterior');
+      const gridLayer = $('gridLayer');
+      const planeLabels = $('planeLabels');
+      const stars = $('stars');
+      const petals = $('petals');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let running = false;
+      let currentCycle = 0;
+      let timeouts = [];
+      const later = (fn, ms) => { const t = window.setTimeout(fn, ms); timeouts.push(t); return t; };
+      const rand = (min,max) => min + Math.random()*(max-min);
+
+      const centerX = 260;
+      const centerY = 223;
+      const scaleX = 11.65;
+      const scaleY = 11.55;
+      const planeAnimated = [];
+      let planeRevealMs = reduceMotion ? 90 : 1800;
+
+      function registerPlane(el, visibleOpacity = 1, delay = 0){
+        el.dataset.visibleOpacity = String(visibleOpacity);
+        el.dataset.delay = String(delay);
+        planeAnimated.push(el);
+      }
+      function addLine(parent, className, x1, y1, x2, y2, delay = 0, visibleOpacity = 1){
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('class', className);
+        line.setAttribute('x1', x1);
+        line.setAttribute('y1', y1);
+        line.setAttribute('x2', x2);
+        line.setAttribute('y2', y2);
+        parent.append(line);
+        line.dataset.length = String(Math.hypot(x2 - x1, y2 - y1));
+        registerPlane(line, visibleOpacity, delay);
+        return line;
+      }
+      function addText(parent, className, x, y, value, delay = 0, visibleOpacity = 1){
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('class', className);
+        text.setAttribute('x', x);
+        text.setAttribute('y', y);
+        text.textContent = value;
+        parent.append(text);
+        registerPlane(text, visibleOpacity, delay);
+        return text;
+      }
+      function addCircle(parent, className, cx, cy, r, delay = 0, visibleOpacity = 1){
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('class', className);
+        circle.setAttribute('cx', cx);
+        circle.setAttribute('cy', cy);
+        circle.setAttribute('r', r);
+        parent.append(circle);
+        registerPlane(circle, visibleOpacity, delay);
+        return circle;
+      }
+      function buildPlane(){
+        gridLayer.replaceChildren();
+        planeLabels.replaceChildren();
+        planeAnimated.length = 0;
+        const width = 520;
+        const height = 470;
+        const marginX = 34;
+        const marginY = 28;
+        const spacing = 32;
+        const tick = 5;
+        let delay = 0;
+        let maxDelay = 0;
+        const remember = value => { maxDelay = Math.max(maxDelay, value); return value; };
+
+        for(let x = centerX - spacing; x >= marginX; x -= spacing) {
+          addLine(gridLayer, 'plane-grid', x, marginY, x, height - marginY, remember(delay), .9);
+          delay += 24;
+        }
+        for(let x = centerX + spacing; x <= width - marginX; x += spacing) {
+          addLine(gridLayer, 'plane-grid', x, marginY, x, height - marginY, remember(delay), .9);
+          delay += 24;
+        }
+        for(let y = centerY - spacing; y >= marginY; y -= spacing) {
+          addLine(gridLayer, 'plane-grid', marginX, y, width - marginX, y, remember(delay), .9);
+          delay += 24;
+        }
+        for(let y = centerY + spacing; y <= height - marginY; y += spacing) {
+          addLine(gridLayer, 'plane-grid', marginX, y, width - marginX, y, remember(delay), .9);
+          delay += 24;
+        }
+
+        const axisDelay = remember(delay + 60);
+        addLine(gridLayer, 'plane-axis', marginX, centerY, width - marginX, centerY, axisDelay, 1);
+        addLine(gridLayer, 'plane-axis', centerX, height - marginY, centerX, marginY, axisDelay + 70, 1);
+
+        for(let x = centerX - spacing; x >= marginX + 2; x -= spacing) {
+          addLine(gridLayer, 'plane-tick', x, centerY - tick, x, centerY + tick, axisDelay + 120, .95);
+        }
+        for(let x = centerX + spacing; x <= width - marginX - 2; x += spacing) {
+          addLine(gridLayer, 'plane-tick', x, centerY - tick, x, centerY + tick, axisDelay + 120, .95);
+        }
+        for(let y = centerY - spacing; y >= marginY + 2; y -= spacing) {
+          addLine(gridLayer, 'plane-tick', centerX - tick, y, centerX + tick, y, axisDelay + 160, .95);
+        }
+        for(let y = centerY + spacing; y <= height - marginY - 2; y += spacing) {
+          addLine(gridLayer, 'plane-tick', centerX - tick, y, centerX + tick, y, axisDelay + 160, .95);
+        }
+
+        addCircle(planeLabels, 'plane-dot', centerX, centerY, 3.2, axisDelay + 210, 1);
+        addText(planeLabels, 'plane-origin', centerX + 8, centerY - 8, '0', axisDelay + 250, 1);
+        addText(planeLabels, 'plane-label', width - marginX + 10, centerY - 10, 'x', axisDelay + 250, 1);
+        addText(planeLabels, 'plane-label', centerX + 10, marginY + 12, 'y', axisDelay + 300, 1);
+        planeRevealMs = reduceMotion ? 90 : maxDelay + 1500;
+      }
+
+      function resetPlane(){
+        for(const el of planeAnimated){
+          el.style.transition = 'none';
+          el.style.opacity = '0';
+          if(el.tagName === 'line'){
+            const len = Number(el.dataset.length || 0);
+            el.style.strokeDasharray = String(len);
+            el.style.strokeDashoffset = String(len);
+          }
+        }
+      }
+      function animatePlane(cycle){
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          if(cycle !== currentCycle) return;
+          for(const el of planeAnimated){
+            const delay = Number(el.dataset.delay || 0);
+            const visibleOpacity = el.dataset.visibleOpacity || '1';
+            if(el.tagName === 'line'){
+              el.style.transition = reduceMotion
+                ? 'none'
+                : `stroke-dashoffset 1.2s ease ${delay}ms, opacity .55s ease ${delay}ms`;
+              el.style.strokeDashoffset = '0';
+            } else {
+              el.style.transition = reduceMotion ? 'none' : `opacity .65s ease ${delay}ms`;
+            }
+            el.style.opacity = visibleOpacity;
+          }
+        }));
+      }
+
+      buildPlane();
+
+      // The exact parametric heart curve documented by Wolfram MathWorld.
+      // x(t) = 16 sin³(t)
+      // y(t) = 13 cos(t) - 5 cos(2t) - 2 cos(3t) - cos(4t)
+      // 0 <= t <= 2 pi
+      const points = [];
+      const count = 650;
+      for(let i=0; i<=count; i++){
+        const t = i/count*Math.PI*2;
+        const x = 16*Math.sin(t)**3;
+        const y = 13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t);
+        points.push([centerX + x*scaleX, centerY - y*scaleY]);
+      }
+      const d = 'M ' + points.map(([x,y])=>`${x.toFixed(2)} ${y.toFixed(2)}`).join(' L ') + ' Z';
+      for(const path of [heartPath,glowPath,interiorPath]) path.setAttribute('d',d);
+      const length = heartPath.getTotalLength();
+      const resetStroke = () => {
+        heartPath.style.transition = 'none';
+        glowPath.style.transition = 'none';
+        for(const path of [heartPath,glowPath]) {
+          path.style.strokeDasharray = String(length);
+          path.style.strokeDashoffset = String(length);
+        }
+      };
+      resetPlane();
+      resetStroke();
+
+      for(let i=0;i<76;i++) {
+        const star=document.createElement('span');
+        star.className='star';
+        star.style.left=rand(1,99)+'%';
+        star.style.top=rand(1,99)+'%';
+        star.style.setProperty('--s',rand(1,2.8)+'px');
+        star.style.setProperty('--o',rand(.24,.78));
+        star.style.setProperty('--d',rand(1.4,4.8)+'s');
+        star.style.setProperty('--delay',rand(-5,0)+'s');
+        stars.append(star);
+      }
+
+      function shower(amount=19){
+        petals.replaceChildren();
+        for(let i=0;i<amount;i++){
+          const el=document.createElement('span');
+          el.className='petal';
+          el.style.setProperty('--x',rand(2,98)+'%');
+          el.style.setProperty('--w',rand(7,16)+'px');
+          el.style.setProperty('--d',rand(5,10)+'s');
+          el.style.setProperty('--delay',rand(0,2.5)+'s');
+          el.style.setProperty('--dx',rand(-110,120)+'px');
+          el.style.setProperty('--rot',rand(200,850)+'deg');
+          petals.append(el);
+        }
+      }
+
+      function setStage(name){
+        cover.setAttribute('aria-hidden',String(name!=='cover'));
+        heartStage.setAttribute('aria-hidden',String(name!=='heart'));
+        finalStage.setAttribute('aria-hidden',String(name!=='final'));
+        if(name==='cover') $('announcement').textContent='Carta lista para abrir.';
+        if(name==='heart') $('announcement').textContent='Primero se dibuja el plano cartesiano y luego aparece un corazón matemático.';
+        if(name==='final') $('announcement').textContent='La carta de amor para Diana está abierta.';
+      }
+
+      function runHeart(cycle){
+        if(cycle!==currentCycle) return;
+        setStage('heart');
+        resetPlane();
+        resetStroke();
+        heartStage.classList.remove('complete');
+        const sparkles=$('heartSparkles');
+        sparkles.replaceChildren();
+        animatePlane(cycle);
+        later(() => {
+          if(cycle!==currentCycle) return;
+          requestAnimationFrame(()=>requestAnimationFrame(()=>{
+            if(cycle!==currentCycle) return;
+            for(const path of [heartPath,glowPath]) {
+              path.style.transition=`stroke-dashoffset ${reduceMotion ? 0.01 : 3.45}s cubic-bezier(.35,.14,.19,1)`;
+              path.style.strokeDashoffset='0';
+            }
+          }));
+          if(!reduceMotion){
+            for(let i=0;i<27;i++){
+              later(()=>{
+                if(cycle!==currentCycle) return;
+                const idx=Math.min(count,Math.floor((i/26)*count));
+                const [x,y]=points[idx];
+                const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+                c.setAttribute('class','heart-sparkle bloom');
+                c.setAttribute('cx',String(x+rand(-7,7)));
+                c.setAttribute('cy',String(y+rand(-7,7)));
+                c.setAttribute('r',String(rand(2.3,5.5)));
+                sparkles.append(c);
+                later(()=>c.remove(),900);
+              },Math.floor(i*126));
+            }
+          }
+        }, planeRevealMs);
+        later(()=>heartStage.classList.add('complete'),planeRevealMs + (reduceMotion?80:3500));
+        later(()=>{
+          if(cycle!==currentCycle) return;
+          setStage('final');
+          shower(reduceMotion?0:24);
+          running=false;
+        },planeRevealMs + (reduceMotion?350:5850));
+      }
+
+      function openLetter(){
+        if(running || cover.getAttribute('aria-hidden')!=='false') return;
+        running=true;
+        const cycle=++currentCycle;
+        envelope.classList.add('open');
+        envelope.disabled=true;
+        openButton.disabled=true;
+        openButton.textContent='Con todo mi corazón ♡';
+        if(!reduceMotion) shower(13);
+        later(()=>runHeart(cycle),reduceMotion?190:1550);
+      }
+      function replay(){
+        ++currentCycle;
+        timeouts.forEach(clearTimeout);
+        timeouts=[];
+        petals.replaceChildren();
+        $('heartSparkles').replaceChildren();
+        heartStage.classList.remove('complete');
+        envelope.classList.remove('open');
+        envelope.disabled=false;
+        openButton.disabled=false;
+        openButton.innerHTML='Abrir mi carta <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16m-7-7 7 7-7 7"/></svg>';
+        resetStroke();
+        running=false;
+        setStage('cover');
+        openButton.focus({preventScroll:true});
+      }
+      envelope.addEventListener('click',openLetter);
+      openButton.addEventListener('click',openLetter);
+      replayButton.addEventListener('click',replay);
+    })();
+  </script>
+</body>
+</html>
